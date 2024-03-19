@@ -15,11 +15,11 @@ conda install -c conda-forge ultralytics
 conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=11.3 -c pytorch -c conda-forge
 
 ## install additional packages
-conda install configargparse
-pip install gdown
-conda install tensorboard
-pip install easydict
-pip install chardet
+conda install configargparse\
+pip install gdown\
+conda install tensorboard\
+pip install easydict\
+pip install chardet\
 pip install hub_sdk
 
 ## install packages for segmentation
