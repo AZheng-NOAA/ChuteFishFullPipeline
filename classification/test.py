@@ -85,35 +85,42 @@ def show_box(box, ax):
     w, h = box[2] - box[0], box[3] - box[1]
     ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='green', facecolor=(0,0,0,0), lw=2))
 
-
-num_videos = len(os.listdir("../"+config["output_dir"]+"/undistorted"))
+if(not os.path.isabs(config["output_dir"])):
+    num_videos = len(os.listdir(config["output_dir"]+"/undistorted"))
+    out_dir =  "../"+config["output_dir"]
+    vid_folder = "../"+config["output_dir"]+"/undistorted/"
+else:
+    num_videos = len(os.listdir(config["output_dir"]+"/undistorted"))
+    out_dir =  config["output_dir"]
+    vid_folder = config["output_dir"]+"/undistorted/"
 video_cnt = 1
-out_dir =  "../"+config["output_dir"]+"/classification"
-outfile_all = open(out_dir + "/total_summary.csv", 'w')
+
+if (not os.path.exists(out_dir)):
+        os.mkdir(out_dir)
+outfile_all = open(out_dir + "/classification/total_summary.csv", 'w')
 outfile_all.write(
         "vid name, ID, start frame, end frame, avg length, track species, track conf\n")
 print("Classification code running now")
-for file in os.listdir("../"+config["output_dir"]+"/undistorted"):
+for file in os.listdir(out_dir+"/undistorted"):
 
     color_dict = {}
     
     print("Processing video %s"%(file))
     filename = file[:-4]
-    det_path = "../"+config["output_dir"]+"/detection/"+filename+".txt"
+    det_path = out_dir+"/detection/"+filename+".txt"
     infile = open(det_path, 'r')
     lines = infile.readlines()
     line_idx = 0
     infile.close()
-    out_path = "../"+config["output_dir"]+"/classification"
-    video_path = "../"+config["output_dir"]+"/undistorted/" + file
-    #print(video_path)
-    if (not os.path.exists(out_path)):
-        os.mkdir(out_path)
 
-    out_video_path =out_path + "/" + file
+    video_path = vid_folder + file
+    #print(video_path)
     
-    outfile = open(out_path + "/"+filename+".csv", 'w')
-    outfile2 = open(out_path + "/"+filename+"_summary.csv", 'w')
+
+    out_video_path =out_dir + "/classification/" + file
+    
+    outfile = open(out_dir + "/classification/"+filename+".csv", 'w')
+    outfile2 = open(out_dir + "/classification/"+filename+"_summary.csv", 'w')
     outfile.write(
         "ID, framenum, length, xmin, ymin, xmax, ymax, near border, frame species, frame conf, track species, track conf\n")
     outfile2.write(
