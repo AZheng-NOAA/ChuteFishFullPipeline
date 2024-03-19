@@ -23,7 +23,7 @@ pip install hub_sdk
 # install packages for segmentation
 pip install opencv-python pycocotools matplotlib onnxruntime onnx
 
-# download segmentation models from https://github.com/facebookresearch/segment-anything and place in segmentation folder
-# vit_h:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
-# vit_l:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
-# vit_b:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth 
+# download segmentation models
+vit_h:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+vit_l:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
+vit_b:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth 
