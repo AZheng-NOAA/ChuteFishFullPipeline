@@ -1,18 +1,20 @@
-# install cuda 11.3 at https://developer.nvidia.com/cuda-11.3.0-download-archive
+# Environment setup
 
-# create new conda environment:
+## install cuda 11.3 at https://developer.nvidia.com/cuda-11.3.0-download-archive
+
+## create new conda environment:
 conda create -n chute_env python=3.8
 
-# activate conda environment
+## activate conda environment
 conda activate chute_env
 
-# install ultralytics
+## install ultralytics
 conda install -c conda-forge ultralytics
 
-# install pytorch
+## install pytorch
 conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=11.3 -c pytorch -c conda-forge
 
-# install additional packages
+## install additional packages
 conda install configargparse
 pip install gdown
 conda install tensorboard
@@ -20,7 +22,7 @@ pip install easydict
 pip install chardet
 pip install hub_sdk
 
-# install packages for segmentation
+## install packages for segmentation
 pip install opencv-python pycocotools matplotlib onnxruntime onnx
 
 # download segmentation models
