@@ -1,6 +1,6 @@
 set config_path="chuteConfig.yml"
 
-call conda activate bycatch
+call conda activate chute_env
 call python calibrate/undistort_videos.py --config_path %config_path%
 
 cd detection
