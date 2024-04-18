@@ -223,11 +223,18 @@ predictor = SamPredictor(sam)
 fig = plt.figure(figsize=(10,10))
 #fig.margins(0,0)
 
-video_dir = "../"+config["output_dir"]+"/undistorted"
-det_dir =  "../"+config["output_dir"]+"/detection"
-class_dir =  "../"+config["output_dir"]+"/classification"
-#share_dir = "F:/noaa/chute_2022/results_trip_%d_share/"%(trip)
-out_dir =  "../"+config["output_dir"]+"/segmentation"
+if(not os.path.isabs(config["output_dir"])):
+    video_dir = "../"+config["output_dir"]+"/undistorted"
+    det_dir =  "../"+config["output_dir"]+"/detection"
+    class_dir =  "../"+config["output_dir"]+"/classification"
+    #share_dir = "F:/noaa/chute_2022/results_trip_%d_share/"%(trip)
+    out_dir =  "../"+config["output_dir"]+"/segmentation"
+else:
+    video_dir = config["output_dir"]+"/undistorted"
+    det_dir =  config["output_dir"]+"/detection"
+    class_dir =  config["output_dir"]+"/classification"
+    #share_dir = "F:/noaa/chute_2022/results_trip_%d_share/"%(trip)
+    out_dir =  config["output_dir"]+"/segmentation"
 if(not os.path.exists(out_dir)):
     os.mkdir(out_dir)
 cnt = 0
