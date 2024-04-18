@@ -86,18 +86,20 @@ def show_box(box, ax):
     ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='green', facecolor=(0,0,0,0), lw=2))
 
 if(not os.path.isabs(config["output_dir"])):
-    num_videos = len(os.listdir(config["output_dir"]+"/undistorted"))
+    num_videos = len(os.listdir("../"+config["output_dir"]+"/undistorted"))
     out_dir =  "../"+config["output_dir"]
     vid_folder = "../"+config["output_dir"]+"/undistorted/"
+    outfile_all = open("../"+out_dir + "/classification/total_summary.csv", 'w')
 else:
     num_videos = len(os.listdir(config["output_dir"]+"/undistorted"))
     out_dir =  config["output_dir"]
     vid_folder = config["output_dir"]+"/undistorted/"
+    outfile_all = open(out_dir + "/classification/total_summary.csv", 'w')
 video_cnt = 1
 
-if (not os.path.exists(out_dir)):
-        os.mkdir(out_dir)
-outfile_all = open(out_dir + "/classification/total_summary.csv", 'w')
+if (not os.path.exists(out_dir+ "/classification")):
+        os.mkdir(out_dir+ "/classification")
+
 outfile_all.write(
         "vid name, ID, start frame, end frame, avg length, track species, track conf\n")
 print("Classification code running now")

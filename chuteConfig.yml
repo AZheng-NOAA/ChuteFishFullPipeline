@@ -16,6 +16,6 @@ class_path: chute2022.pth
 
 segment_model: "h"
 # Whether to perform segmentation or just visualize detection and classification results
-segment: True
+segment: False
 # number of points for midline
 midline_pts: 10

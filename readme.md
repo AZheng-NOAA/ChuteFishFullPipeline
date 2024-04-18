@@ -25,6 +25,11 @@ pip install hub_sdk
 ## install packages for segmentation
 pip install opencv-python pycocotools matplotlib onnxruntime onnx
 
+# download detection model
+https://drive.google.com/file/d/17nEVps8HzAJ93AmSNCKyIXgbrzdayPvR/view?usp=sharing
+
+# download classification model 
+
 # download segmentation models
 vit_h:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
 vit_l:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
