@@ -89,16 +89,17 @@ if(not os.path.isabs(config["output_dir"])):
     num_videos = len(os.listdir("../"+config["output_dir"]+"/undistorted"))
     out_dir =  "../"+config["output_dir"]
     vid_folder = "../"+config["output_dir"]+"/undistorted/"
-    outfile_all = open("../"+out_dir + "/classification/total_summary.csv", 'w')
 else:
     num_videos = len(os.listdir(config["output_dir"]+"/undistorted"))
     out_dir =  config["output_dir"]
     vid_folder = config["output_dir"]+"/undistorted/"
-    outfile_all = open(out_dir + "/classification/total_summary.csv", 'w')
+
 video_cnt = 1
 
 if (not os.path.exists(out_dir+ "/classification")):
-        os.mkdir(out_dir+ "/classification")
+    os.mkdir(out_dir+ "/classification")
+
+outfile_all = open(out_dir + "/classification/total_summary.csv", 'w')
 
 outfile_all.write(
         "vid name, ID, start frame, end frame, avg length, track species, track conf\n")
