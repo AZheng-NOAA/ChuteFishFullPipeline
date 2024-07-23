@@ -336,7 +336,7 @@ def detect(opt):
                     else:  # stream
                         fps, w, h = 30, im0.shape[1], im0.shape[0]
 
-                    vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
+                    vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'VP90'), fps, (w, h))
                 vid_writer.write(im0)
 
             if save_clip and len(outputs):
@@ -358,7 +358,7 @@ def detect(opt):
                         start_time = str(hour).rjust(2, '0') + "_" + str(minute).rjust(2, '0') + "_" + str(sec).rjust(2,'0')
                         #obj_clip_path = os.path.join(clip_save_folder, "object_"+str(obj_id)+'_'+start_time+'.mp4')
                         obj_clip_path = clip_save_folder +'/'+ "object_"+str(obj_id)+'_'+start_time+'.mp4'
-                        obj_vid_writer_all[obj_id] = cv2.VideoWriter(obj_clip_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
+                        obj_vid_writer_all[obj_id] = cv2.VideoWriter(obj_clip_path, cv2.VideoWriter_fourcc(*'VP90'), fps, (w, h))
                     obj_vid_writer_all[obj_id].write(im0)
                 for obj_id in deleted:
                     obj_vid_writer_all[obj_id].release()

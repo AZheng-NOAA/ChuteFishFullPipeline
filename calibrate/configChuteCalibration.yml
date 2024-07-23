@@ -1,0 +1,384 @@
+%YAML:1.0  
+# do not remove the above line
+
+#######################################################
+#  UWEE Chute Logger Fish Segmentation Configuration  #
+#######################################################
+
+# ======================= InputAndOutput Parameters ====================== #
+InputAndOutput:
+
+    # InputDir: input directory (default: ".\\")
+    InputDir: "//content//ChuteFishFullPipeline//chute demo//"
+
+    # OutputDir: output directory (default: ".\\results\\")
+    OutputDir: "//content//ChuteFishFullPipeline//chute demo//"
+
+    # ============================= Input Parameters ========================= #
+
+    ###### Segmentation Filenames
+    # InputList: fish image names in a text file
+    # BackgroundList: background image names in a text file
+    # GroundTruthList: ground truth image names in a text file
+    # CameraParamFilename: input camera parameter filename
+    InputList: "img_list-sample.txt"
+    BackgroundList: ""
+    GroundTruthList: ""
+    CameraParamFilenameBEV: "cameraParamBEV-alpha-0.2.xml"
+
+    #### Optional settings for using directory rather than filename list. For example, "C:\\FolderName\\". Set to non-empty to use this option. (default: "")
+    InputListDir: ""#"D:\\noaa\\data\\chute\\ChuteLabTesting\\Variables\\Exposure1000\\"
+    BackgroundListDir: "D:\\noaa\\data\\chute\\ChuteLabTesting\\Variables\\Background\\"
+    GroundTruthListDir: ""
+    
+    ###### Segmentation Filenames for Video input
+    # InputVideoList: video names in a text file
+    # InputVideoListDir: optional settings for using directory
+    InputVideoList: ""
+    InputVideoListDir: ""
+
+    ###### ROI Parameters
+    # ROI: ROI file name (default: ROI.png)
+    # DetectROI: whether to detect the ROI using chute surface blue color (1 for Yes/ 0 for No, default: 0)
+    # DetectROIType: type to detect ROI (0 for RGB channel thresholding, 1 for mean-shift segmentation, 2 for adaptive background color model, 3 for line detection, default: 0)
+    ROI: ""
+    DetectROI: 1
+    DetectROIType: 2
+    
+    ###### Shape Model Parameters
+    # IsUsingShapeModel: whether to use shape model (1 for Yes/ 0 for No, default: 0)
+    # ShapeModelPath: path to shape model (default: ".\\fish shape\\train_data\\")
+    # NoseDirection: nose direction in rectified image (0 for left/ 1 for right, default: 1)
+    # FixRotation: whether to fix rotation of shape model to nose direction (1 for Yes/ 0 for No, default: 1)
+    IsUsingShapeModel: 1
+    ShapeModelPath: ".\\fish shape\\train_data\\"
+    NoseDirection: 0
+    FixRotation: 1
+
+    ###### Additional parameters for Video Input
+    # NumInitBgFrames: number of frames to initialize background subtraction (default: 100)
+    # LearningRate: learning rate for GMM (default: 0.005)
+    # LearningRateFg: learning rate for GMM when there are foreground (default: 0.001)
+    # DownSampleFrames: rate of downsampling frames (default: 10)
+    # FLower: ratio of lower resolution for fast background subtraction (default: 1.0/32 = 0.03125)
+    # IOUThreshold: threshold of intersection-over-union (IOU) of foreground object for association between frames. (default: 0.2)
+    # ROIshape: ROI for shape model. If not provided, process the whole image. (default: "")
+    # ShapeMovementThreshold: threshold of movement of foreground object for performing shape model in pixels. Set to negative number to disable this option (run all images). (default: -1)
+    NumInitBgFrames: 100
+    LearningRate: 0.005
+    LearningRateFg: 0.001
+    DownSampleFrames: 10
+    FLower: 0.03125
+    IOUThreshold: 0.2
+    ROIshape: "ROIshape.png"
+    ShapeMovementThreshold: 100
+    
+    # StartImage: image number to start segmentation (default: 0)
+    # StopImage: image number to stop segmentation; set to a negative number to process all images (default: -1)
+    StartImage: 0
+    StopImage: -1
+    
+    # CompareGT: whether to compare the segmentation result with ground truth (1 for Yes/ 0 for No, default: 0)
+    CompareGT: 0
+
+    # ============================= Output Parameters ======================== #
+    
+    # OutputFilename: output fish length file name; must be *.csv
+    OutputFilename: "length.csv"
+    
+    # WriteResults, WriteResultsMask, WriteResultsDemo: save result images/masks/demo to ./results/ folder (1 for Yes/ 0 for No, default: 1, 1, 0)
+    WriteResults: 1
+    WriteResultsMask: 1
+    WriteResultsDemo: 0
+
+    # ShowResults, ShowResultsMask, ShowResultsDemo: display result images/masks/demo at runtime (1 for Yes/ 0 for No, default: 1, 1, 0)
+    ShowResults: 1
+    ShowResultsMask: 1
+    ShowResultsDemo: 0
+
+    # WriteResultsRotatedSeg, WriteResultsRotatedSegMask: save rotated and segmented result images/masks to ./results/ folder (1 for Yes/ 0 for No, default: 0)
+    # RotatedSegMarginRatio: additional margin ratio for rotated and segmented result images; if set to 0.1, the final image size becomes 1.2 times larger than the fish (default: 0.1)
+    WriteResultsRotatedSeg: 0
+    WriteResultsRotatedSegMask: 0
+    RotatedSegMarginRatio: 0.1
+
+    # nLevel: Number of levels of the input image path is applied to the output path. (default: 5)
+    # For example, given input C:\FolderA\FolderB\FolderC\image.jpg, nLevel = 2 will save the output image as OutputDir\FolderB\FolderC\image.jpg, and nLevel = 0 will save the output image as OutputDir\image.jpg
+    # Sometimes the output fails due to too long output path. In that case, try smaller nLevel.
+    nLevel: 2
+
+# ======================= Calibration Parameters ========================= #
+CamCalibBEV:
+    ###### Calibration
+    CamCalib:
+        # CalibrationList: calibration image names in a text file (default: "cal_list.txt")
+        # CalibrationListDir: Optional settings for using directory rather than filename list. For example, "C:\\FolderName\\". Set to non-empty to use this option. (default: "")
+        CalibrationList: ""
+        CalibrationListDir: ""
+        
+        # CalibrationVideoList: calibration video names in a text file (default: "cal_list.txt")
+        # CalibrationVideoListDir: Optional settings for using directory rather than filename list. For example, "C:\\FolderName\\". Set to non-empty to use this option. (default: "")
+        CalibrationVideoList: ""
+        CalibrationVideoListDir: "//content//ChuteFishFullPipeline//chute demo//calibration_video"
+        
+        ###### Chessboards
+        # nCornersPerRow: number of INNER corners (excluding the first and last one) in a chessboard row (default: 9)
+        # nCornersPerCol: number of INNER corners (excluding the first and last one) in a chessboard column (default: 9)
+        # gridSize: real size of chessboard grid in millimeters (default: 50)
+        # scaleFactor: downsize factor for chessboard images; between 0 and 1 (default: 0.5)
+        # cornerWindowSize: half of the side length of the search window for corner refinement (default: 5)
+        # numCalMax: maximum number of images used for calibration (default: 50)
+        nCornersPerRow: 6
+        nCornersPerCol: 5
+        gridSize: 50
+        scaleFactor: 0.25
+        cornerWindowSize: 5
+        numCalMax: 16
+
+    ###### BEV Calibration
+    # CalibrationBEVList: BEV calibration image names to define the x- and y- direction
+    # CalibrationListDirBEV: Optional settings for using directory rather than filename list. For example, "C:\\FolderName\\". Set to non-empty to use this option. (default: "")
+    CalibrationListBEV: ""
+    CalibrationListDirBEV: ""
+    
+    # CalibrationVideoBEVList: BEV calibration video names to define the x- and y- direction
+    # CalibrationVideoListDirBEV: Optional settings for using directory rather than filename list. For example, "C:\\FolderName\\". Set to non-empty to use this option. (default: "")
+    CalibrationVideoListBEV: ""
+    CalibrationVideoListDirBEV: "//content//ChuteFishFullPipeline//chute demo//calibration_video"
+
+    # CameraParamFilenameBEV: output camera parameter BEV filename
+    CameraParamFilenameBEV: "cameraParamBEV-alpha-0.2.xml"
+    
+    ###### Chessboards
+    # nCornersPerRow: number of INNER corners (excluding the first and last one) in a chessboard row (default: 9)
+    # nCornersPerCol: number of INNER corners (excluding the first and last one) in a chessboard column (default: 9)
+    # gridSize: real size of chessboard grid in millimeters (default: 50)
+    # scaleFactor: downsize factor for chessboard images; between 0 and 1 (default: 0.5)
+    # cornerWindowSize: half of the side length of the search window for corner refinement (default: 5)
+    nCornersPerRow: 6
+    nCornersPerCol: 5
+    gridSize: 50
+    scaleFactor: 0.25
+    cornerWindowSize: 5
+    
+    ###### BEV Image Layout Parameters
+    # mBEV: magnification ratio in the output bird's eye view image (pixel/mm); set to nonpositive to disable this option (default: 1.0)
+    # alphaBEV: scaling parameter between 0 and 1; 0 means the rectified image has no black areas, 1 means the rectified image preserve all the pixels from the original image; set to negative to disable this option (default: 1.0)
+    # widthBEV, heightBEV: width and height of BEV image; set to 0 to use the same size as input image (default: 0)
+    # xBEV: the x position of the top-left INNER corner of the first chessboard image in the output bird's eye view image; set to negative to align left (default: -1.0)
+    # yBEV: the y position of the top-left INNER corner of the first chessboard image in the output bird's eye view image; set to negative to align top (default: -1.0)
+    # - The software first try to use mBEV and alphaBEV to calculate the layout.
+    # - If mBEV is enabled but alphaBEV is disabled, it will use mBEV, widthBEV, heightBEV, xBEV and yBEV.
+    # - If mBEV is disabled, it will try to use widthBEV, heightBEV and alphaBEV. If alphaBEV is disable, all pixels will be preserved (like alphaBEV is set to 1).
+    # - Recommend using mBEV and alphaBEV only.
+    mBEV: 1.0
+    alphaBEV: 0.2
+    widthBEV: 1500
+    heightBEV: 700
+    xBEV: 450
+    yBEV: 200
+
+
+# ======================= Segmentation Parameters ======================== #
+ObjSeg:
+    ###### GMM Parameters
+    GMM:
+        # method: background subtraction method. 0 for GMM, 1 for Simple thresholding in HSV, 2 for adaptive thresholding in HSV without background images (default: 0)
+        # maxNumBgImgs: maximum number of background image stored (default: 100)
+        method: 0
+        maxNumBgImgs: 100
+        
+        # isColorTransfer: whether doing color transfer for background subtraction (0 for No/ 1 for Yes, default: 0)
+        # colorTransferType: (0 for transfer background images, 1 for transfer input images, default: 0)
+        # colorTransferCountsMax: duration of recalculating color transfer model (default: 100)
+        isColorTransfer: 0
+        colorTransferType: 0
+        colorTransferCountsMax: 100
+        
+        ### method 0
+        # VarThreshold: The main threshold on the squared Mahalanobis distance to decide if the sample is well described by the background model or not. (default: 16.0)
+        # NMixtures: Maximum allowed number of mixture components (default: 5)
+        # BackgroundRatio: Threshold defining whether the component is significant enough to be included into the background model (default: 0.9)
+        # VarThresholdGen: Threshold for the squared Mahalanobis distance that helps decide when a sample is close to the existing components (corresponds to Tg) (default: 9). If it is not close to any component, a new component is generated. 3 sigma => Tg=3*3=9 is default.
+        # VarInit: The initial variance of each gaussian component. (default: 15.0)
+        # VarMin: The minimum initial variance of each gaussian component. (default: 4.0)
+        # VarMax: The maximum initial variance of each gaussian component. (default: 75.0)
+        # fTau: Shadow threshold; the smaller the less pixel preserved as foreground (default: 0.5)
+        VarThreshold: 16.0
+        NMixtures: 5
+        BackgroundRatio: 0.9
+        VarThresholdGen: 9
+        VarInit: 15.0
+        VarMin: 4.0
+        VarMax: 75.0
+        fTau: 0.5
+        
+        ### method 1
+        # threshHSV: threshold for the difference between input image and background image (default: 15.0)
+        # aH: weight for hue (H) (default: 1.0)
+        # aS: weight for saturation (S) (default: 0.1)
+        # aV: weight for value (V) (default: 0.2)
+        threshHSV: 15.0
+        aH: 1.0
+        aS: 0.1
+        aV: 0.2
+        
+        ### method 2
+        # h_bg_init: initial guess of background H value (120 for blue, defalut: 120)
+        # h_bg_diff_thresh_init: initial guess of the possible difference of background H value from h_bg_init (default: 20)
+        # v_bg_min_init: initial guess of maximum of background V value (defalut: 100)
+        # v_bg_max_init: initial guess of maximum of background V value (defalut: 200)
+        # nH: threshold of H value in standard deviation of background color in which the pixel will be considered as background (default: 1.0)
+        # nS: threshold of S value in standard deviation of background color in which the pixel will be considered as background (default: 1.5)
+        # nV: threshold of V value in standard deviation of background color in which the pixel will be considered as background (default: 1.5)
+        h_bg_init: 120
+        h_bg_diff_thresh_init: 20
+        v_bg_min_init: 100
+        v_bg_max_init: 200
+        nH: 1.0
+        nS: 1.5
+        nV: 1.5
+
+    ###### Histogram Backprojection Parameters
+    HistBackprojection:
+        # isUsingHSVHist: whether use histogram in HSV space (1 for Yes/ 0 for No, default: 0)
+        # nbinsB: number of bins for histogram in B channels
+        # nbinsG: number of bins for histogram in G channels
+        # nbinsR: number of bins for histogram in R channels
+        # nbinsH: number of bins for histogram in H channels
+        # nbinsS: number of bins for histogram in S channels
+        # nbinsV: number of bins for histogram in V channels
+        # theta: threshold for histogram backprojection, higher threshold leads to less pixels preserved as foreground; between 0 and 1 (default: 0.8)
+        # dilationSize: diameter of structuring element in dilation to get larger mask; the larger, the more background pixel are compared (default: 9)
+        isUsingHSVHist: 1
+        nbinsB: 16
+        nbinsG: 16
+        nbinsR: 16
+        nbinsH: 18
+        nbinsS: 16
+        nbinsV: 16
+        theta: 0.8
+        dilationSize: 9
+
+    ###### Active Contour Parameters
+    ActiveContour:
+        # numPoints: number of points on active contour (default: 200)
+        # maxIterInner: maximum number of inner iteration (default: 300)
+        # maxIterOuter: maximum number of outer iteration (default: 3)
+        # wEdge: weight of edge component; the larger, the easier the contour attaches to edges (default: 0.6)
+        # wCont: weight of contour continuity; the larger, the more the conotur shrinks (default: 0.15)
+        # wCurv: weight of contour curverature; the larger, the smoother the contour (default: 0.2)
+        # wBall: weight of expanding balloon force; the larger, the larger the contour expanding force (default: 0.15)
+        # stepSize: maximum step size in each inner iteration (default: 9)
+        # minDist: minimum distance between neighboring contour points in outer iteration (default: 5.0)
+        numPoints: 200
+        maxIterInner: 300
+        maxIterOuter: 3
+        wEdge: 0.6
+        wCont: 0.15
+        wCurv: 0.2
+        wBall: 0.15
+        stepSize: 9
+        minDist: 5
+
+    ###### CRF Parameters
+    ObjSegCRF:
+        # parameters for CRF
+        #CRFinHSV: do CRF in HSV or BGR (default: 1)
+        #nIterations: number of iterations (default: 5)
+        #gt_prob: probability of correct segmentation before CRF (default: 0.7)
+        #
+        #sx: standard deviation of x (default: 5)
+        #sy: standard deviation of y (default: 5)
+        #wxy: weight of the gaussian term (default: 5)
+        #
+        #sx_bgr: standard deviation of x in the bilateral filter in xy and bgr (default: 60)
+        #sy_bgr: standard deviation of y in the bilateral filter in xy and bgr (default: 60)
+        #sb_bgr: standard deviation of b in the bilateral filter in xy and bgr (default: 40)
+        #sg_bgr: standard deviation of g in the bilateral filter in xy and bgr (default: 20)
+        #sr_bgr: standard deviation of r in the bilateral filter in xy and bgr (default: 20)
+        #wbgr: weight of the bilateral filter in xy and bgr (default: 20)
+        #
+        #sx_hsv: standard deviation of x in the bilateral filter in xy and hsv (default: 60)
+        #sy_hsv: standard deviation of y in the bilateral filter in xy and hsv (default: 60)
+        #sh_hsv: standard deviation of h in the bilateral filter in xy and hsv (default: 10)
+        #ss_hsv: standard deviation of s in the bilateral filter in xy and hsv (default: 20)
+        #sv_hsv: standard deviation of v in the bilateral filter in xy and hsv (default: 20)
+        #whsv: weight of the bilateral filter in xy and hsv (default: 20)
+        CRFinHSV: 1
+        nIterations: 5
+        gt_prob: 0.52
+        
+        sx: 5
+        sy: 5
+        wxy: 5
+        
+        sx_bgr: 60
+        sy_bgr: 60
+        sb_bgr: 40
+        sg_bgr: 20
+        sr_bgr: 20
+        wbgr: 20
+        
+        sx_hsv: 30
+        sy_hsv: 30
+        sh_hsv: 5
+        ss_hsv: 5
+        sv_hsv: 10
+        whsv: 20
+
+    # isUsingHistBP: whether using histogram backprojection (1 for Yes/ 0 for No, default: 1)
+    # isUsingActiveContour: whether using active contour (1 for Yes/ 0 for No, default: 0)
+    # isUsingDenseCRF: whether using conditional random field (CRF) for refinement (1 for Yes/ 0 for No, default: 0)
+    isUsingHistBP: 0
+    isUsingActiveContour: 0
+    isUsingDenseCRF: 0
+
+    # morphSESize: structuring element size for post-processing; usually an odd number. Larger structuring element size leads to smoother object boundary but less details are preserved. (default: 5)
+    # minArea: minimum preserved object area (default: 10000)
+    # maxArea: maximum preserved object area; -1 means infinity (default: -1.0)
+    # minAspectRatio: minimum preserved object aspect ratio; must be greater than or equal to 1 (default: 1.0)
+    # maxAspectRatio: maximum preserved object aspect ratio; must be greater than or equal to 1 (default: 7.0)
+    morphSESize: 5
+    minArea: 20000
+    maxArea: -1
+    minAspectRatio: 1.0
+    maxAspectRatio: 7.0
+
+
+# ======================== Measurement Parameters ======================== #
+Measurement:
+
+    ###### Midline Parameters
+    # IsMidlineLength: measure midline length (1 for Yes/ 0 for No, default: 1)
+    # MidlinePrecision: precision of midline. Precision of n gives about n midline points (default: 4.0)
+    # MidlineType: 0 for using only head and tail endpoint, 1 for fixing the narrowest midline point between body and tail (default: 0)
+    IsMidlineLength: 1
+    MidlinePrecision: 10
+    MidlineType: 1
+    
+    ###### Blur Measure Parameters
+    # IsBlurMeasure: detect blur in images (1 for Yes/ 0 for No, default: 0)
+    # BlurMeasureThresh: threshold for drawing the blur sections on output image (default: 1000)
+    IsBlurMeasure: 0
+    BlurMeasureThresh: 1000
+    
+    ###### Edge Measure Parameters
+    # IsEdgeMeasure: detect contour touching the ROI edge (1 for Yes/ 0 for No, default: 0)
+    # EdgeMeasureThresh: threshold for drawing the edge sections on output image (default: 0.02)
+    IsEdgeMeasure: 1
+    EdgeMeasureThresh: 0.02
+    
+    ###### Drawing Parameters
+    # IsShowBoundingBox: show bounding box in images (1 for Yes/ 0 for No, default: 1)
+    # IsShowContour: show contour in images (1 for Yes/ 0 for No, default: 1)
+    # IsShowMidline: show midline in images (1 for Yes/ 0 for No, default: 1)
+    # IsShowBlurSections: show blur regions in images (1 for Yes/ 0 for No, default: 0)
+    # IsShowEdgeSections: show edge sections in images (1 for Yes/ 0 for No, default: 0)
+    IsShowBoundingBox: 1
+    IsShowContour: 1
+    IsShowMidline: 1
+    IsShowBlurSections: 1
+    IsShowEdgeSections: 1
+
+

@@ -73,7 +73,7 @@ for vidname in os.listdir(config["input_dir"]):
     
     video_path = config["input_dir"] + "/" + vidname
     out_path = config["output_dir"] + "/undistorted/" + vidname
-    out = cv.VideoWriter(out_path,cv.VideoWriter_fourcc(*'mp4v'), config["fps"], bevsize)
+    out = cv.VideoWriter(out_path,cv.VideoWriter_fourcc(*'VP90'), config["fps"], bevsize)
 
     vidcap = cv.VideoCapture(video_path)
     vid_length = int(vidcap.get(cv.CAP_PROP_FRAME_COUNT))

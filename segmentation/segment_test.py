@@ -19,7 +19,7 @@ args = parser.parse_args()
 with open(args.config_path, 'r') as file:
     config = yaml.safe_load(file)
 
-tree = ET.parse(config["calib_path"])
+tree = ET.parse("../"+config["calib_path"])
 root = tree.getroot()
 element = root.find("CameraParamBEV/mBEV")
 mBEV = float(element.text)
@@ -153,7 +153,7 @@ def getPts(pts, img):
 
     return [int(data_pts[hpt,0]), int(data_pts[hpt,1])], [int(data_pts[tpt1,0]), int(data_pts[tpt1,1])]
 
-def getMidline(mask_show, depth = 0):
+def getMidline(mask_show):
     blank = np.zeros(mask_show.shape, dtype = np.uint8)
     contours, _ = cv2.findContours(mask_show, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
     maxidx = 0
@@ -168,7 +168,7 @@ def getMidline(mask_show, depth = 0):
             maxarea = area
             maxidx = i
             x,y,w,h = cv2.boundingRect(contour)
-    if(maxarea > 0 and depth < 200):
+    if(maxarea > 0):
         if(find_kernel_size):
             kernel_size = max(1, int(min(w,h)/midline_pts))
             find_kernel_size = False
@@ -176,7 +176,7 @@ def getMidline(mask_show, depth = 0):
         kernel = np.ones((kernel_size,kernel_size),np.uint8)
         erosion = cv2.erode(mask_show,kernel,iterations = 1)
         hpt, tpt = getPts(contours[maxidx], mask_show)
-        hpts, tpts = getMidline(erosion, depth + 1)
+        hpts, tpts = getMidline(erosion)
         hpts.insert(0,hpt)
         tpts.append(tpt)
     else:
@@ -256,7 +256,7 @@ for path in os.listdir(video_dir):
     success, img = vidcap.read()
     framecnt = 2
     im_size = (img.shape[1],img.shape[0])
-    out = cv2.VideoWriter(out_dir + "/" + path, cv2.VideoWriter_fourcc(*'VP09'), 10, (img.shape[1],img.shape[0]))
+    out = cv2.VideoWriter(out_dir + "/" + path, cv2.VideoWriter_fourcc(*'mp4v'), 10, (img.shape[1],img.shape[0]))
     f2 = class_dir + "/" + name + ".csv"
     f3 = out_dir + "/" + name + ".csv"
     f4 = out_dir + "/"+name
@@ -373,7 +373,7 @@ for path in os.listdir(video_dir):
     outfile.close()
     out.release()
     vidcap.release()
-    vid_cnt +=1
+    vidcnt +=1
 
         
                 

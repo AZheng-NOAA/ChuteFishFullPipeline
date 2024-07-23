@@ -3,3 +3,7 @@
 /classification/__pycache__
 /test_vid
 /test_out
+run_chute_all.bat
+/demo/calibration
+/classification/hist
+/demo
