@@ -15,9 +15,7 @@ from torchvision import datasets, transforms
 import yaml
 import cv2 as cv
 import argparse
-import matplotlib.pyplot as plt
-from scipy.stats import truncnorm
-from scipy.optimize import fmin_slsqp
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--config_path", help = "path to configuration file")
@@ -144,7 +142,7 @@ for file in os.listdir(out_dir+"/undistorted"):
     track_results = []
     track_consensus = []
     avg_length = []
-    while (success and line_idx < len(lines) and framecnt < 5000):
+    while (success and line_idx < len(lines)):
         if(framecnt %10 == 0):
             print("classifying video %d/%d: frame %d/%d"%(video_cnt, num_videos,framecnt,vid_length),  end = "\r")
         box = imgorig
@@ -188,7 +186,7 @@ for file in os.listdir(out_dir+"/undistorted"):
             id = int(items[4])
             while(len(track_results) <= id):
                 track_results.append([])
-            track_results[id].append([preds[0].cpu().numpy(),prob[0][preds[0]].cpu().numpy(), frame, width*height])
+            track_results[id].append([preds[0].cpu().numpy(),prob[0][preds[0]].cpu().numpy(), frame])
             #outfile.write("%s,%d,10.0,%d,%d,%d,%d,0,%s,%f\n" % (
             #items[4], framecnt, xmin, xmin + width, ymin, ymin + height, classnames[preds[0]],
             #prob[0][preds[0]]))
@@ -226,28 +224,13 @@ for file in os.listdir(out_dir+"/undistorted"):
     for i in range(len(track_results)):
         votes = [0.0]*len(classnames)
         cnt = [0]*len(classnames)
-        hist = [0]*20
-        area = []
         for j in range(len(track_results[i])):
             votes[track_results[i][j][0]]+=track_results[i][j][1]
             cnt[track_results[i][j][0]] += 1
-            area.append(track_results[i][j][3])
         if(len(track_results[i]) > 0):
-            for j in range(len(area)):
-                hist[int(area[j]/max(area)*19)] +=1
             trackid = np.argmax(votes)
             track_consensus.append([trackid, votes[trackid]/cnt[trackid]])
 
-            if(len(track_results[i]) > 10):
-                #loc_guess, scale_guess = max(area), max(area)-min(area)
-                #par = truncnorm.fit(np.array(area),loc=loc_guess, scale=scale_guess)
-                #rv = truncnorm(a, b, loc=loc, scale=scale)
-                x = np.linspace(min(area),max(area),1000)
-                fig, ax = plt.subplots(1, 1)
-                x = np.linspace(min(area), max(area), 1000)
-                ax.hist(area, bins=10, density=True, histtype='stepfilled', alpha=0.3)
-                #ax.plot(x, truncnorm.pdf(x, *par),'k--', lw=1, alpha=1.0, label='truncnorm fit')
-                plt.savefig("hist/%d_hist.jpg"%(i))
         else:
             track_consensus.append([])
     for i in range(len(results)):
