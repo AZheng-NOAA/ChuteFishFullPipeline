@@ -29,6 +29,7 @@ pip install opencv-python pycocotools matplotlib onnxruntime onnx
 https://drive.google.com/file/d/17nEVps8HzAJ93AmSNCKyIXgbrzdayPvR/view?usp=sharing
 
 # download classification model 
+https://drive.google.com/drive/folders/13D_ebQXyF7LqQrSTNoazjofbsmiIECcj?usp=sharing
 
 # download segmentation models
 vit_h:https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth

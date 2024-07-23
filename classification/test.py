@@ -31,7 +31,7 @@ with open(args.config_path, 'r') as file:
 model_save = torch.load(config["class_path"])
 
 classnames= model_save["classnames"]
-prior = model_save["prior"]
+prior = model_save["target"]
 source_cnt = model_save["source"]
 ##classnames = ["Arrowtooth Flounder", "Bathyraja Unidentified", "Big Skate", "Darkblotched Rockfish", "Dover Sole",
 ##              "Dungeness Crab", "English Sole", "Flathead Sole", "Lingcod", "Longnose Skate", "Other", "Pacific Sanddab",
