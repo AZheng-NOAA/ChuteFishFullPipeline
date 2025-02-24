@@ -1,0 +1,40 @@
+ID, framenum, length, xmin, ymin, xmax, ymax, near border, frame species, frame conf, track species, track conf
+1,4,10.0,666,252,1039,410,0,Lingcod,0.458409, Sablefish, 0.756268
+1,5,10.0,558,291,980,401,0,Sablefish,0.973535, Sablefish, 0.756268
+1,6,10.0,459,313,824,425,0,Sablefish,0.862868, Sablefish, 0.756268
+1,7,10.0,320,346,678,457,0,Sablefish,0.554263, Sablefish, 0.756268
+1,8,10.0,147,355,523,478,0,Sablefish,0.986163, Sablefish, 0.756268
+1,9,10.0,0,382,369,483,0,Sablefish,0.947821, Sablefish, 0.756268
+1,10,10.0,0,395,181,469,0,Sablefish,0.212960, Sablefish, 0.756268
+1,11,10.0,0,415,52,477,0,Other,0.341689, Sablefish, 0.756268
+7,16,10.0,896,162,1060,300,0,Other,0.156596, Petrale Sole, 0.609101
+7,17,10.0,884,150,1059,298,0,Pacific Sanddab,0.647189, Petrale Sole, 0.609101
+7,18,10.0,869,145,1062,300,0,Other,0.248536, Petrale Sole, 0.609101
+7,19,10.0,857,141,1062,301,0,Pacific Sanddab,0.178128, Petrale Sole, 0.609101
+7,20,10.0,838,142,1066,304,0,Pacific Sanddab,0.564690, Petrale Sole, 0.609101
+7,21,10.0,816,139,1064,310,0,Rex Sole,0.229119, Petrale Sole, 0.609101
+7,22,10.0,782,139,1063,311,0,Petrale Sole,0.496862, Petrale Sole, 0.609101
+7,23,10.0,738,144,1054,312,0,Petrale Sole,0.475742, Petrale Sole, 0.609101
+7,24,10.0,702,144,1036,313,0,Petrale Sole,0.822913, Petrale Sole, 0.609101
+7,25,10.0,663,152,1008,311,0,English Sole,0.844500, Petrale Sole, 0.609101
+8,25,10.0,844,276,1050,387,0,Pacific Sanddab,0.440601, Slender Sole, 0.660000
+7,26,10.0,634,153,961,306,0,Petrale Sole,0.658408, Petrale Sole, 0.609101
+8,26,10.0,763,294,1001,400,0,Slender Sole,0.568061, Slender Sole, 0.660000
+7,27,10.0,601,152,911,304,0,Petrale Sole,0.691323, Petrale Sole, 0.609101
+8,27,10.0,674,314,910,413,0,Slender Sole,0.600113, Slender Sole, 0.660000
+7,28,10.0,562,150,856,311,0,English Sole,0.418018, Petrale Sole, 0.609101
+8,28,10.0,571,331,803,429,0,Pacific Sanddab,0.584381, Slender Sole, 0.660000
+7,29,10.0,512,143,795,317,0,Petrale Sole,0.399504, Petrale Sole, 0.609101
+8,29,10.0,444,349,683,451,0,Slender Sole,0.815171, Slender Sole, 0.660000
+7,30,10.0,449,137,725,326,0,Petrale Sole,0.718957, Petrale Sole, 0.609101
+8,30,10.0,297,371,546,473,0,Slender Sole,0.605145, Slender Sole, 0.660000
+9,30,10.0,881,165,1057,303,0,Other,0.193212, Flathead Sole, 0.264189
+7,31,10.0,378,135,646,337,0,English Sole,0.779972, Petrale Sole, 0.609101
+8,31,10.0,148,378,404,483,0,Pacific Sanddab,0.770019, Slender Sole, 0.660000
+9,31,10.0,846,168,1061,304,0,Flathead Sole,0.313273, Flathead Sole, 0.264189
+7,32,10.0,304,138,553,348,0,English Sole,0.700767, Petrale Sole, 0.609101
+8,32,10.0,30,373,262,478,0,Pacific Sanddab,0.422610, Slender Sole, 0.660000
+9,32,10.0,816,170,1058,312,0,Flathead Sole,0.215104, Flathead Sole, 0.264189
+7,33,10.0,216,141,442,365,0,English Sole,0.668045, Petrale Sole, 0.609101
+8,33,10.0,0,365,121,471,0,Slender Sole,0.711508, Slender Sole, 0.660000
+9,33,10.0,779,173,1057,314,0,Scallop,0.214285, Flathead Sole, 0.264189

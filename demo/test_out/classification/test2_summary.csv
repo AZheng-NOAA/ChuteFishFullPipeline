@@ -1,0 +1,5 @@
+ID, start frame, end frame, avg length, track species, track conf
+1,4,11,10.0,Sablefish,0.756268
+7,16,33,10.0,Petrale Sole,0.609101
+8,25,33,10.0,Slender Sole,0.660000
+9,30,33,10.0,Flathead Sole,0.264189

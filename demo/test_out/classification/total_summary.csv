@@ -1,0 +1,5 @@
+vid name, ID, start frame, end frame, avg length, track species, track conf
+test2.mp4,1,4,11,10.0,Sablefish,0.756268
+test2.mp4,7,16,33,10.0,Petrale Sole,0.609101
+test2.mp4,8,25,33,10.0,Slender Sole,0.660000
+test2.mp4,9,30,33,10.0,Flathead Sole,0.264189
